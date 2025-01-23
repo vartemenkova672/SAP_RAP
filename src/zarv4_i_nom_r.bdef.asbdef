@@ -1,0 +1,52 @@
+managed implementation in class zbp_arv4_i_nom_r unique;
+strict ( 2 );
+
+define behavior for ZARV4_I_NOM_R alias _Nomenclature
+persistent table zarv4_d_nome
+lock master
+authorization master (instance)
+etag master NomenclatureIDUi
+{
+  create;
+  update;
+  delete;
+
+  association _NomenclatureTxt { create; }
+
+  field ( numbering : managed, readonly ) NomenclatureIDUi;
+  field ( mandatory : create ) NomenclatureID, Article, UnitTypeId, IndicatorOfUse;
+  field ( readonly ) RemainingQuantity, ReserveQuantity, IdentificatorName, UnitTypeName;
+
+  action ( features : instance ) DelWithCheck;
+
+  mapping for zarv4_d_nome
+    {
+      NomenclatureIDUi = nomenclature_uuid;
+      NomenclatureID   = nomenclature_id;
+      Article          = article;
+      UnitTypeId       = unit_type_id;
+      IndicatorOfUse   = indicator_of_use;
+      Counter          = countexternal_use;
+    }
+}
+
+define behavior for ZARV4_I_NOM_T alias _NomenclatureT
+persistent table zarv4_d_nom_t
+lock dependent by _Nomenclature
+authorization dependent by _Nomenclature
+etag master NomenclatureId
+{
+  update;
+   delete;
+
+  field ( readonly ) NomenclatureId;
+  field ( mandatory : create ) Language;
+  association _Nomenclature;
+
+  mapping for zarv4_d_nom_t
+    {
+      NomenclatureId   = nomenclature_uuid;
+      Language         = spras;
+      NomenclatureName = nomenclature_name;
+    }
+}

@@ -1,0 +1,12 @@
+projection implementation in class zbp_arv4_i_transact_r unique;
+strict ( 2 ) ;
+
+
+define behavior for ZARV4_C_TRANSACT_R  alias TransactC
+{
+  use create;
+  use update;
+  use delete;
+
+    use action Reserve;
+ }

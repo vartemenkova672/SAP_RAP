@@ -1,0 +1,5 @@
+CLASS zbp_arv4_i_transact_r DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zarv4_i_transact_r.
+ENDCLASS.
+
+CLASS zbp_arv4_i_transact_r IMPLEMENTATION.
+ENDCLASS.

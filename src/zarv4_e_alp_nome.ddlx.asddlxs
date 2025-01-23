@@ -1,0 +1,85 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: { typeName: 'Nomenclature',
+                  typeNamePlural: 'Nomenckatures',
+                  title.value: 'NomenclatureId'
+                  , description.value: 'Name'
+                }
+@UI.selectionPresentationVariant:[
+    {  //chart and table
+        qualifier: 'Default',
+        presentationVariantQualifier: 'Default',
+        selectionVariantQualifier: 'Default'
+    }]
+
+@UI.presentationVariant:[
+    { //main area chart
+        qualifier: 'Default',
+        visualizations: [{
+            type: #AS_CHART,
+            qualifier: 'ChartDefault'
+        }]
+    }
+    ]
+@UI.selectionVariant:[
+    { //main area
+        qualifier: 'Default',
+        text: 'Default'
+
+    }]
+@UI.chart: [
+    {
+            qualifier: 'ChartDefault',
+            chartType: #COLUMN,
+            dimensions:  [ 'Name' ],
+            measures:  [ 'AvailableQuantity' ],
+            dimensionAttributes: [{ dimension: 'Name', role: #SERIES }],
+            measureAttributes:   [{ measure:   'AvailableQuantity', role: #AXIS_1  }]
+    }
+]
+annotate view ZARV4_C_ALP_NOME with
+{
+  @UI.facet: [{
+                  id:              'GeneralInformation',
+                  type:            #COLLECTION,
+                  label:           'Nomenclature information',
+                  position:        10
+               },
+               {
+                  id:              'BasicData',
+                  purpose:         #STANDARD ,
+                  parentId:        'GeneralInformation',
+                  type:            #FIELDGROUP_REFERENCE,
+                  position:        10,
+                  targetQualifier: 'BasicData'
+               }]
+
+  @UI.lineItem:       [{ position: 10, importance: #HIGH }]
+  @UI.lineItem: [{label: 'ID'}]
+  NomenclatureId;
+
+  @UI.lineItem:       [{ position: 20, importance: #HIGH }]
+  Name;
+
+  @UI.lineItem:       [{ position: 40, importance: #MEDIUM }]
+  @UI.dataPoint: { title: 'Quantity' }
+  Quantity;
+
+  @UI.lineItem:       [{ position: 50, importance: #MEDIUM }]
+  @UI.dataPoint: { title: 'Reserve quantity' }
+  ReserveQuantity;
+
+  @UI.lineItem:       [{ position: 60, importance: #MEDIUM }]
+  @UI.dataPoint: { title: 'Available quantity' }
+  AvailableQuantity;
+    
+  
+  @UI.fieldGroup:    [{ position: 10, qualifier: 'BasicData' }]
+  Article;
+
+  @UI.fieldGroup:    [{ position: 20, qualifier: 'BasicData' }]
+  UnitTypeName;
+
+  @UI.fieldGroup:    [{ position: 30, qualifier: 'BasicData' }]
+  IndicatorName;
+
+}

@@ -1,0 +1,63 @@
+managed with additional save implementation in class zbp_arv4_i_transact_r unique;
+strict ( 2 );
+//extensible
+//{
+//  with additional save;
+//  with determinations on modify;
+//  with determinations on save;
+ // with validations on save;
+//}
+with draft;
+
+define behavior for ZARV4_I_TRANSACT_R alias TransactR
+persistent table zarv4_d_transact
+draft table zarv4_dt_transac
+lock master
+total etag Record
+authorization master ( instance )
+etag master Record
+
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) Record;
+
+  field ( mandatory : create ) NomenclatureID, EmployeeId, TransactionQuantity, TransactionPrice, TransactionDescription, TransactionCurrency;
+
+  field ( readonly : update ) TransactionPrice, TransactionCurrency, TransactionQuantity, NomenclatureID;
+  field ( readonly ) TransactionDate, TransactionTime, TitleId, TitleName, EmployeeName, NomenclatureName, UnitTypeName, NomenclatureIDUi,
+  IdentificatorName, Article, TransactionAmount, ReserveQuantity, RecordId;
+
+  event AddCount parameter ZARV4_A_NOM_P;
+  event DelCount parameter ZARV4_A_NOM_P;
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+
+  draft determine action Prepare;
+
+
+  validation validateNomAvailability on save { create; update; }
+  determination addEntry on save { create; }
+  action ( features : instance ) Reserve result [1] $self;
+
+  mapping for zarv4_d_transact
+    {
+      Record                 = record;
+      RecordId               = record_id;
+      NomenclatureIDUi       = nomenclature_uuid;
+      EmployeeId             = responsible_person;
+      TransactionQuantity    = transaction_quantity;
+      TransactionAmount      = transaction_amount;
+      TransactionPrice       = transaction_price;
+      TransactionCurrency    = transaction_price_currency;
+      TransactionDate        = transaction_date;
+      TransactionTime        = transaction_time;
+      TransactionDescription = transaction_description;
+      ReserveQuantity        = reserve_quantity;
+    }
+}

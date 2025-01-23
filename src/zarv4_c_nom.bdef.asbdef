@@ -1,0 +1,19 @@
+projection;
+strict ( 2 );
+
+define behavior for ZARV4_C_NOM alias _Nomenclature
+{
+  use create;
+  use update;
+
+  use action DelWithCheck;
+
+  use association _NomenclatureTxt { create; }
+}
+
+define behavior for ZARV4_C_NOM_T alias _NomenclatureT
+{
+  use update;
+
+  use association _Nomenclature;
+}

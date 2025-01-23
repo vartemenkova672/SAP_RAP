@@ -1,0 +1,4 @@
+@EndUserText.label: 'Serv Definition for Nomenclature ALP'
+define service ZARV4_UI_ALP_NOME {
+  expose ZARV4_C_ALP_NOME as ALPNomenclature;
+}

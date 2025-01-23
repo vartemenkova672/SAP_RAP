@@ -1,0 +1,8 @@
+@EndUserText.label: 'Serv Definition for Transactions'
+define service ZARV4_UI_TRANSACTIONS {
+  expose ZARV4_C_TRANSACT_R as Transactions;
+  expose ZARV4_I_NOM        as INomenclature;
+  expose ZARV4_I_WORKER     as Employees;
+  expose ZARV4_I_TITLES     as Titles;
+  expose I_Currency         as Currency;
+}

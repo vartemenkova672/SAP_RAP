@@ -1,0 +1,126 @@
+@Metadata.layer:#CORE
+@UI.headerInfo: { typeName: 'Transaction',
+                  typeNamePlural: 'Transactions'
+                                  }
+
+annotate entity ZARV4_C_TRANSACT_R with
+{
+
+  @UI.facet: [
+               {
+                   id:              'GeneralInformstion',
+                   type:            #COLLECTION,
+                   label:           'General Information',
+                   position:        10
+                }
+                ,
+               {
+                   id:              'TransactionInformation',
+                   type:            #COLLECTION,
+                   label:           'Transaction Information',
+                   position:        20
+                },
+               {
+                   id:              'TransactionDate',
+                   purpose:         #STANDARD ,
+                   parentId:        'TransactionInformation',
+                   type:            #FIELDGROUP_REFERENCE,
+                   label:           'Transaction Date',
+                   position:        10,
+                   targetQualifier: 'TransactionDate'
+                },
+               {
+                   id:              'BookedNomenclature',
+                   purpose:         #STANDARD ,
+                   parentId:        'TransactionInformation',
+                   type:            #FIELDGROUP_REFERENCE,
+                   label:           'Booked  Nomenclature',
+                   position:        20,
+                   targetQualifier: 'BookedNomenclature'
+                },
+               {
+                   id:              'ResponsiblePerson',
+                   purpose:         #STANDARD ,
+                   parentId:        'TransactionInformation',
+                   type:            #FIELDGROUP_REFERENCE,
+                   label:           'Responsible Person',
+                   position:        30,
+                   targetQualifier: 'ResponsiblePerson'
+                } ,
+                {
+                   id:              'TransactionContents',
+                   purpose:         #STANDARD ,
+                   parentId:        'TransactionInformation',
+                   type:            #FIELDGROUP_REFERENCE,
+                   label:           'Transaction Content',
+                   position:        40,
+                   targetQualifier: 'TransactionContents'
+                }]
+
+@UI.identification: [{ type: #FOR_ACTION, dataAction: 'Reserve', label: ' Reserve add/remove' }]
+  @UI.hidden: true
+  Record;
+
+  @UI.fieldGroup:     [{ position: 10, qualifier: 'BookedNomenclature' }]
+  @UI.lineItem:       [{ position: 10, importance: #HIGH }]
+  @UI.lineItem:       [{label: 'ID'}]
+  @UI.dataPoint: { title: 'Record Id' }
+  RecordId;
+
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem:       [{ position: 20, importance: #HIGH }]
+  @UI.lineItem:       [{label: 'Date'}]
+  @UI.fieldGroup:     [{ position: 10, qualifier: 'GeneralInformstion' }]
+  @UI.dataPoint: { title: 'Transaction Date' }
+  TransactionDate;
+
+  @UI.lineItem:       [{ position: 30, importance: #HIGH }]
+  @UI.lineItem:       [{label: 'Time'}]
+  @UI.fieldGroup:     [{ position: 20, qualifier: 'GeneralInformstion' }]
+  @UI.dataPoint: { title: 'Transaction Time' }
+  TransactionTime;
+
+  @UI.selectionField: [{ position: 30 }]
+  @UI.lineItem:       [{ position: 40, importance: #HIGH }]
+  @UI.fieldGroup:     [{ position: 30, qualifier: 'BookedNomenclature' }]
+  NomenclatureID;
+
+ // @UI.lineItem:      [{ position: 50, importance: #HIGH }]
+  @UI.fieldGroup:    [{ position: 40, qualifier: 'BookedNomenclature' }]
+  Article;
+
+  @UI.fieldGroup:    [{ position: 50, qualifier: 'BookedNomenclature' }]
+  IdentificatorName;
+
+  @UI.selectionField: [{ position: 40 }]
+///  @UI.lineItem:       [{ position: 60, importance: #HIGH }]
+  @UI.fieldGroup:     [{ position: 60, qualifier: 'ResponsiblePerson' }]
+  EmployeeId;
+
+  @UI.selectionField: [{ position: 50 }]
+  @UI.fieldGroup:     [{ position: 70, qualifier: 'ResponsiblePerson' }]
+  TitleName;
+
+  @UI.selectionField: [{ position: 60 }]
+  @UI.lineItem:       [{ position: 50, importance: #MEDIUM}]
+  @UI.lineItem:       [{label: 'Quantity'}]
+  @UI.fieldGroup:     [{ position: 80, qualifier: 'TransactionContents' }]
+  TransactionQuantity;
+
+  @UI.fieldGroup:     [{ position: 90, qualifier: 'TransactionContents' }]
+  @UI.lineItem:       [{ position: 60, importance: #MEDIUM }]
+  @UI.lineItem:       [{label: 'Price'}]
+  TransactionPrice;
+
+  @UI.fieldGroup:     [{ position: 100, qualifier: 'TransactionContents' }]
+  @UI.lineItem:       [{ position: 70, importance: #MEDIUM }]
+  @UI.lineItem:       [{label: 'Amount'}]
+  TransactionAmount;
+  
+  @UI.fieldGroup:     [{ position: 110, qualifier: 'TransactionContents' }]
+  ReserveQuantity;
+
+  @UI.lineItem:       [{ position: 80, importance: #MEDIUM }]
+  @UI.fieldGroup:     [{ position: 120, qualifier: 'TransactionContents' }]
+  TransactionDescription;
+}

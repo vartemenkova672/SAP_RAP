@@ -1,0 +1,118 @@
+@Metadata.layer: #CORE
+
+@UI.chart:[
+            { //Chart SUM Quantity By Nomenclature
+              qualifier:             'ChartSUMQuantityByNomenclature',
+              chartType:             #COLUMN,
+              title:               'Transaction quantity by nomenclature ID',
+              dimensions:          [ 'NomenclatureUuid'],
+              measures:            [ 'TransactionQuantity'] ,
+              dimensionAttributes: [{ dimension:  'NomenclatureUuid',    role: #CATEGORY }],
+              measureAttributes:   [{ measure:    'TransactionQuantity', role: #AXIS_1 }]
+            },
+            { //Chart SUM Amount By Person
+              qualifier:             'ChartSUMAmountByPerson',
+              chartType:             #DONUT,
+              title:               'Transaction amount by employee',
+              dimensions:          [ 'EmployeeName'],
+              measures:            [ 'TransactionAmount'],
+              dimensionAttributes: [{ dimension:  'EmployeeName',     role: #CATEGORY }],
+              measureAttributes:   [{ measure:    'TransactionAmount', role: #AXIS_1 }]
+            } ,
+            { //Chart SUM Amount By Type
+              qualifier:             'ChartSUMAmountByType',
+              chartType:             #DONUT,
+              title:               'Transaction quantity by item type',
+              dimensions:          [ 'TypeOfNomenclature'],
+              measures:            [ 'TransactionQuantity'],
+              dimensionAttributes: [{ dimension:  'TypeOfNomenclature',     role: #CATEGORY }],
+              measureAttributes:   [{ measure:    'TransactionQuantity', role: #AXIS_1 }]
+            } ,
+            { //Chart Price By Nomenclature
+              qualifier:             'ChartPriceByNomenclature',
+              chartType:             #BAR,
+              title:               'Average price by nomenclature',
+              dimensions:          [ 'NomenclatureUuid'],
+              measures:            [ 'TransactionPrice'],
+              dimensionAttributes: [{ dimension:  'NomenclatureUuid',     role: #CATEGORY }],
+              measureAttributes:   [{ measure:    'TransactionPrice', role: #AXIS_1 }]
+           } ,
+           { //Chart Amount By Date
+              qualifier:             'ChartAmountByDate',
+              chartType:             #LINE,
+              title:               'Transaction amount by date',
+              dimensions:          [ 'TransactionDate'],
+              measures:            [ 'TransactionAmount'],
+              dimensionAttributes: [{ dimension:  'TransactionDate',     role: #CATEGORY }],
+              measureAttributes:   [{ measure:    'TransactionAmount', role: #AXIS_1 }]
+           }
+]
+
+@UI.presentationVariant:[
+                          {
+                            qualifier:      'pvSUMQuantityByNomenclature',
+                            visualizations: [{
+                                               type:      #AS_CHART,
+                                               qualifier: 'ChartSUMQuantityByNomenclature'
+                                            }]
+                      } ,
+                        {
+                        qualifier:      'pvSUMAmountByPerson',
+                         visualizations: [{
+                                          type:      #AS_CHART,
+                                              qualifier: 'ChartSUMAmountByPerson'
+                                          }]
+                       } ,
+                    {
+                        qualifier:      'pvPriceByNomenclature',
+                     visualizations: [{
+                                         type:      #AS_CHART,
+                                   qualifier: 'ChartPriceByNomenclature'
+                                      }]
+                         } ,
+                                                                   {
+                        qualifier:      'pvSUMAmountByType',
+                     visualizations: [{
+                                         type:      #AS_CHART,
+                                   qualifier: 'ChartSUMAmountByType'
+                                      }]
+                         } ,
+                        {
+                           qualifier:      'pvAmountByDate',
+                           visualizations: [{
+                                               type:      #AS_CHART,
+                                               qualifier: 'ChartAmountByDate'
+                                           }]
+}
+]
+
+
+annotate entity ZARV4_C_OVP_TRANSACT with
+{
+  @UI.hidden: true
+  Record;
+  @UI.lineItem: [{ position: 20 }]
+  NomenclatureUuid;
+  @UI.lineItem: [{ position: 30 }]
+  NomenclatureName;
+  @UI.lineItem: [{ position: 40 }]
+  ResponsiblePerson;
+  @UI.lineItem: [{ position: 50 }]
+  PersonName;
+  @UI.lineItem: [{ position: 60 }]
+  TransactionDate;
+  @UI.lineItem: [{ position: 70 }]
+  TransactionQuantity;
+  @UI.lineItem: [{ position: 80 }]
+  TransactionAmount;
+  @UI.lineItem: [{ position: 90 }]
+  TransactionPrice;
+  @UI.lineItem: [{ position: 110 }]
+  TypeOfNomenclature;
+  /* Associations */
+  @UI.hidden: true
+  _EmployeeT;
+  @UI.hidden: true
+  _NomnclatureT;
+
+}

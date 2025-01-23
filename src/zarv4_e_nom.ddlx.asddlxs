@@ -1,0 +1,113 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: { typeName: 'Nomenclature',
+                  typeNamePlural: 'Nomenclatures',
+                  imageUrl: 'imageUrl',
+                  title.value: 'NomenclatureID',
+                  description.value: 'Article'
+                                  }
+
+annotate entity ZARV4_C_NOM with
+{
+
+
+  @UI.facet: [
+
+                {
+                    id:              'GeneralInformstion',
+                    type:            #COLLECTION,
+                    label:           'General Information',
+                    position:        10
+                 }
+                 ,
+                {
+                    id:              'NomenclatureInformation',
+                    type:            #COLLECTION,
+                    label:           'Nomenclature Information',
+                    position:        20
+                 },
+                {
+                    id:              'Nomenclature',
+                    purpose:         #STANDARD ,
+                    parentId:        'NomenclatureInformation',
+                    type:            #FIELDGROUP_REFERENCE,
+                    label:           'Nomenclature',
+                    position:        10,
+                    targetQualifier: 'Nomenclature'
+                 },
+                 {
+                    id:              'UnitType',
+                    purpose:         #STANDARD ,
+                    parentId:        'NomenclatureInformation',
+                    type:            #FIELDGROUP_REFERENCE,
+                    label:           'Unit Type',
+                    position:        20,
+                    targetQualifier: 'UnitType'
+                 },
+
+                  {
+                    id:              'RemainingQuantity',
+                    purpose:         #STANDARD ,
+                    parentId:        'NomenclatureInformation',
+                    type:            #FIELDGROUP_REFERENCE,
+                    label:           'Remaining Quantity',
+                    position:        30,
+                    targetQualifier: 'RemainingQuantity'
+                 },
+                 {
+                    id:              'ReservedQuantity',
+                    purpose:         #STANDARD ,
+                    parentId:        'NomenclatureInformation',
+                    type:            #FIELDGROUP_REFERENCE,
+                    label:           'Reserved Quantity',
+                    position:        40,
+                    targetQualifier: 'ReservedQuantity'
+                 },
+                {
+                    id:                 'NomTxt',
+                    purpose:            #STANDARD,
+                    type:               #LINEITEM_REFERENCE,
+                    label:              'Nomenclature Text',
+                    position:            20,
+                    targetElement:      '_NomenclatureTxt'
+           }]
+
+  @UI.lineItem: [{ type: #FOR_ACTION, dataAction: 'DelWithCheck', label: ' Delete ', position: 10 }]
+  @UI.identification:  [{ type: #FOR_ACTION, dataAction: 'DelWithCheck', label: ' Delete ', position: 10 }]
+
+  @UI.hidden: true
+  NomenclatureIDUi;
+
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem:       [{ position: 10, importance: #HIGH }]
+  @UI.fieldGroup:     [{ position: 10, qualifier: 'Nomenclature' }]
+  NomenclatureID;
+
+  @UI.lineItem:      [{ position: 30, importance: #HIGH }]
+  @UI.fieldGroup:    [{ position: 30, qualifier: 'Nomenclature' }]
+  Article;
+
+  @UI.fieldGroup:    [{ position: 40, qualifier: 'Nomenclature' }]
+  IndicatorOfUse;
+
+  @UI.lineItem:      [{ position: 40, importance: #HIGH }]
+  @UI.fieldGroup:    [{ position: 50, qualifier: 'Nomenclature' }]
+  IdentificatorName;
+
+  @UI.fieldGroup:    [{ position: 60, qualifier: 'UnitType' }]
+  UnitTypeId;
+
+  @UI.lineItem:      [{ position: 50, importance: #HIGH }]
+  @UI.fieldGroup:    [{ position: 70, qualifier: 'UnitType' }]
+  UnitTypeName;
+
+  @UI.lineItem:       [{ position: 60, importance: #HIGH }]
+  @UI.fieldGroup:     [{ position: 80, qualifier: 'RemainingQuantity' }]
+  @UI.lineItem:       [{label: 'Remaining Quantity'}]
+  RemainingQuantity;
+
+  @UI.lineItem:       [{ position: 70, importance: #HIGH }]
+  @UI.fieldGroup:     [{ position: 90, qualifier: 'ReservedQuantity' }]
+  @UI.lineItem:       [{label: 'Reserved Quantity'}]
+  ReserveQuantity;
+
+}

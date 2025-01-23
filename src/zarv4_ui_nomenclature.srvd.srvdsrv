@@ -1,0 +1,7 @@
+@EndUserText.label: 'Serv Definition for Nomenclature'
+define service ZARV4_UI_NOMENCLATURE {
+  expose ZARV4_C_NOM      as Nomenclature;
+  expose ZARV4_C_NOM_T    as NomenclatureT;
+  expose ZARV4_I_NOM_TYPE as NomenclatureType;
+  expose ZARV4_I_U_TYPES  as UnitType;
+}

@@ -1,0 +1,6 @@
+@EndUserText.label: 'OVP: Transacts'
+define service ZARV4_UI_OVP_TRANSACT {
+  expose ZARV4_C_OVP_TRANSACT as OVPTransacts;
+  expose ZARV4_I_NOM          as Nomenclature;
+  expose ZARV4_I_WORKER       as Employees;
+}

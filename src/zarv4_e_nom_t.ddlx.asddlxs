@@ -1,0 +1,19 @@
+@Metadata.layer: #CORE
+annotate entity ZARV4_C_NOM_T with
+{
+  @UI.facet: [ { id: 'NomTxt', type: #IDENTIFICATION_REFERENCE, label: 'Nomenclature name', position: 10 } ]
+
+  @UI.identification: [ { position: 10, label: 'Nomenclature name' } ]
+  @UI.lineItem:       [{ position: 10, importance: #HIGH }]
+  Language;
+
+  @UI.hidden: true
+  NomenclatureId;
+
+  @UI.identification: [ { position: 20, label: 'Nomenclature name' } ]
+  @UI.lineItem: [ { position: 20 } ]
+  NomenclatureName;
+
+
+
+}
